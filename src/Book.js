@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Book() {
+export default function Book({ book }) {
   return (
     <li>
       <div className="book">
@@ -10,8 +11,7 @@ export default function Book() {
             style={{
               width: 128,
               height: 193,
-              backgroundImage:
-                'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")',
+              backgroundImage: `url(${book.imageLinks.thumbnail})`,
             }}
           ></div>
           <div className="book-shelf-changer">
@@ -26,9 +26,21 @@ export default function Book() {
             </select>
           </div>
         </div>
-        <div className="book-title">To Kill a Mockingbird</div>
-        <div className="book-authors">Harper Lee</div>
+        <div className="book-title">{book.title}</div>
+        {book.authors.map(author => (
+          <div className="book-authors" key={author}>
+            {author}
+          </div>
+        ))}
       </div>
     </li>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string),
+    imageLinks: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
 }
