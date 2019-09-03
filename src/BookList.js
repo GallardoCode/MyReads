@@ -7,6 +7,7 @@ import BookShelf from './BookShelf'
 class BookList extends Component {
   static propTypes = {
     books: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onUpdateBookShelf: PropTypes.func.isRequired,
   }
 
   state = {
@@ -33,7 +34,7 @@ class BookList extends Component {
 
   render() {
     const { shelves } = this.state
-    const { books } = this.props
+    const { books, onUpdateBookShelf } = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -42,7 +43,12 @@ class BookList extends Component {
         <div className="list-books-content">
           <div>
             {shelves.map(shelf => (
-              <BookShelf shelf={shelf} books={books} key={shelf} />
+              <BookShelf
+                shelf={shelf}
+                books={books}
+                onUpdateBookShelf={onUpdateBookShelf}
+                key={shelf}
+              />
             ))}
           </div>
         </div>

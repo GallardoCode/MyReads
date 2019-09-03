@@ -6,6 +6,7 @@ class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.arrayOf(PropTypes.object).isRequired,
     shelf: PropTypes.string.isRequired,
+    onUpdateBookShelf: PropTypes.func.isRequired,
   }
 
   nameSwitch = param => {
@@ -24,7 +25,7 @@ class BookShelf extends Component {
   }
 
   render() {
-    const { shelf, books } = this.props
+    const { shelf, books, onUpdateBookShelf } = this.props
     const shelfBooks = books.filter(book => book.shelf === shelf)
     return (
       <div className="bookshelf">
@@ -32,7 +33,11 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {shelfBooks.map(book => (
-              <Book book={book} key={book.id} />
+              <Book
+                book={book}
+                key={book.id}
+                onUpdateBookShelf={onUpdateBookShelf}
+              />
             ))}
           </ol>
         </div>
