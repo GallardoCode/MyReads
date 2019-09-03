@@ -16,6 +16,8 @@ class BookShelf extends Component {
         return 'Want to Read'
       case 'read':
         return 'Read'
+      case 'none':
+        return 'None'
       default:
         return param
     }
