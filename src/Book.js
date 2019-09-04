@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function Book({ book, onUpdateBookShelf }) {
+export default function Book({ book, onUpdateBookShelf, shelves }) {
   return (
     <li>
       <div className="book">
@@ -22,10 +22,11 @@ export default function Book({ book, onUpdateBookShelf }) {
               <option value="move" disabled>
                 Move to...
               </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
+              {shelves.map(shelf => (
+                <option key={shelf.shelf} value={shelf.shelf}>
+                  {shelf.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -48,4 +49,13 @@ Book.propTypes = {
     shelf: PropTypes.string,
   }).isRequired,
   onUpdateBookShelf: PropTypes.func.isRequired,
+  shelves: PropTypes.arrayOf(PropTypes.object),
+}
+
+Book.defaultProps = {
+  shelves: [
+    { shelf: 'currentlyReading', name: 'Currently Reading' },
+    { shelf: 'wantToRead', name: 'Want to Read' },
+    { shelf: 'read', name: 'Read' },
+  ],
 }
