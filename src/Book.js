@@ -13,12 +13,17 @@ export default function Book({ book, onUpdateBookShelf, shelves }) {
           <div className="book-cover" style={bookImgStlye}></div>
           <div className="book-shelf-changer">
             <select
-              value={book.shelf ? book.shelf : 'move'}
+              value={book.shelf ? book.shelf : 'none'}
               onChange={e => onUpdateBookShelf(book, e.target.value)}
             >
               <option value="move" disabled>
                 Move to...
               </option>
+              {!book.shelf ? (
+                <option value="none" disabled>
+                  None
+                </option>
+              ) : null}
               {shelves.map(shelf => (
                 <option key={shelf.shelf} value={shelf.shelf}>
                   {shelf.name}
