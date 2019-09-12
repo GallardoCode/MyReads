@@ -2,21 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export default function Book({ book, onUpdateBookShelf, shelves }) {
+  let bookImgStlye = { width: 128, height: 193 }
+  bookImgStlye = book.imageLinks
+    ? { ...bookImgStlye, backgroundImage: `url(${book.imageLinks.thumbnail})` }
+    : bookImgStlye
   return (
     <li>
       <div className="book">
         <div className="book-top">
-          <div
-            className="book-cover"
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`,
-            }}
-          ></div>
+          <div className="book-cover" style={bookImgStlye}></div>
           <div className="book-shelf-changer">
             <select
-              value={book.shelf}
+              value={book.shelf ? book.shelf : 'move'}
               onChange={e => onUpdateBookShelf(book, e.target.value)}
             >
               <option value="move" disabled>
@@ -31,11 +28,13 @@ export default function Book({ book, onUpdateBookShelf, shelves }) {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        {book.authors.map(author => (
-          <div className="book-authors" key={author}>
-            {author}
-          </div>
-        ))}
+        {book.authors
+          ? book.authors.map(author => (
+              <div className="book-authors" key={author}>
+                {author}
+              </div>
+            ))
+          : null}
       </div>
     </li>
   )
