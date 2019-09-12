@@ -1,3 +1,7 @@
+# MyReads App
+
+This a "Must Read" app to keep track of books in shelves according to their status. E.g Currently Reading, Want to Read, Read. The app also has a search to find new books and add them to one of your shelves. This app was developed in accordance to the [Udacity Ruberic](https://review.udacity.com/#!/rubrics/918/view).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
